@@ -1,12 +1,13 @@
 import firebase from "firebase/compat/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCwIJHKKSpwVZBWuFRbIj8Hxo4NH4c9u84",
-  authDomain: "social-pro-89a4d.firebaseapp.com",
-  projectId: "social-pro-89a4d",
-  storageBucket: "social-pro-89a4d.appspot.com",
-  messagingSenderId: "224511454855",
-  appId: "1:224511454855:web:ad537d5ca2ab819b3e9222"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSender: process.env.REACT_APP_MESSAGIN_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 // Initialize Firebase
