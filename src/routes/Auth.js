@@ -5,6 +5,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(true);
+  const [error, setError] = useState("");
   const onChange = (e) => {
     const {
       target: { name, value }, // target 안에 name, value값을 넣어줌
@@ -32,9 +33,10 @@ const Auth = () => {
       }
       console.log(data);
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
   };
+  const toggleAccount = () => setNewAccount((prev) => !prev);
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -55,7 +57,9 @@ const Auth = () => {
           onChange={onChange}
         />
         <input type="submit" value={newAccount ? "계정생성" : "로그인"} />
+        {error}
       </form>
+      <span onClick={toggleAccount}>{newAccount ? "로그인" : "계정생성"}</span>
       <div>
         <button>Google로그인</button>
         <button>Github로그인</button>
