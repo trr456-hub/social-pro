@@ -8,7 +8,7 @@ const AppRouter = ({ isLoggedIn }) => {
     <Router>
       <Switch>
         {isLoggedIn ? (
-          // Fragment <>부모요소 없이 렌더 하고싶을때</>
+          // Fragment <>부모요소 없이 render 하고싶을때</>
           <>
             <Route exact path="/">
               <Home />
