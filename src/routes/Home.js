@@ -1,9 +1,21 @@
+import { dbService } from "fbase";
+import { addDoc, collection } from "firebase/firestore";
 import React, { useState } from "react";
 
 const Home = () => {
   const [tweet, setTweet] = useState(""); // 글작성 tweet을 가지는 useState 작성
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const docRef = await addDoc(collection(dbService, "tweets"), {
+        tweet,
+        createdAt: Date.now(),
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+    setTweet("");
   };
   const onChange = (e) => {
     const {
