@@ -1,5 +1,6 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import "firebase/database"; //database생성뒤 임포트
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
