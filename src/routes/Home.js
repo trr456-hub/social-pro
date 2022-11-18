@@ -1,3 +1,4 @@
+import Nweet from "components/Nweet";
 import { dbService } from "fbase";
 import {
   collection,
@@ -10,7 +11,7 @@ import {
 import React, { useEffect, useState } from "react";
 
 const Home = ({ userObj }) => {
-  //console.log(userObj); ID값 조회
+  //console.log(userObj); //ID값 조회
   const [nweet, setNweet] = useState(""); // 글작성 tweet을 가지는 useState 작성
   const [nweets, setNweets] = useState([]);
   const getNweets = async () => {
@@ -20,6 +21,7 @@ const Home = ({ userObj }) => {
         ...document.data(),
         id: document.id, //id값을 할당해주고 그걸 함수에 담아준다.
       };
+      //console.log(nweetObject);
       setNweets((prev) => [nweetObject, ...prev]);
     });
   };
@@ -70,10 +72,11 @@ const Home = ({ userObj }) => {
       </form>
       <div>
         {nweets.map((nweet) => (
-          <div key={nweet.id}>
-            {/* map으로 배열에 있는 nweet 콜백하여 출력 */}
-            <h4>{nweet.text}</h4>
-          </div>
+          <Nweet
+            key={nweet.id}
+            nweetObj={nweet}
+            isOwner={nweet.creatorId === userObj.uid}
+          />
         ))}
       </div>
     </div>
