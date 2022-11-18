@@ -1,8 +1,16 @@
 import { dbService } from "fbase";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  onSnapshot,
+  query,
+  orderBy,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 
-const Home = () => {
+const Home = ({ userObj }) => {
+  //console.log(userObj); ID값 조회
   const [nweet, setNweet] = useState(""); // 글작성 tweet을 가지는 useState 작성
   const [nweets, setNweets] = useState([]);
   const getNweets = async () => {
@@ -16,13 +24,27 @@ const Home = () => {
     });
   };
   useEffect(() => {
+    // firebase v9로 작성 v8로 작성하면 typeerror
     getNweets();
+    const q = query(
+      collection(dbService, "nweets"),
+      orderBy("createdAt", "desc")
+    );
+    onSnapshot(q, (snapshot) => {
+      const nweetArr = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setNweets(nweetArr);
+      //console.log(nweetArr);
+    });
   }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
     await addDoc(collection(dbService, "nweets"), {
-      nweet,
+      text: nweet,
       createdAt: Date.now(),
+      creatorId: userObj.uid,
     });
     setNweet("");
   };
@@ -48,9 +70,9 @@ const Home = () => {
       </form>
       <div>
         {nweets.map((nweet) => (
-          <div key={nweet.id}> 
-          {/* map으로 배열에 있는 nweet 콜백하여 출력 */}
-            <h4>{nweet.nweet}</h4>
+          <div key={nweet.id}>
+            {/* map으로 배열에 있는 nweet 콜백하여 출력 */}
+            <h4>{nweet.text}</h4>
           </div>
         ))}
       </div>

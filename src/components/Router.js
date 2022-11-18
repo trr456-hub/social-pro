@@ -5,7 +5,7 @@ import Auth from "../routes/Auth";
 import Profile from "routes/Profile";
 import Navigation from "components/Navigation";
 
-const AppRouter = ({ isLoggedIn }) => {
+const AppRouter = ({ isLoggedIn, userObj }) => {
   return (
     <Router>
       {isLoggedIn && <Navigation />}
@@ -14,7 +14,7 @@ const AppRouter = ({ isLoggedIn }) => {
           // Fragment <>부모요소 없이 render 하고싶을때</>
           <>
             <Route exact path="/">
-              <Home />
+              <Home userObj={userObj} />
             </Route>
             <Route exact path="/profile">
               <Profile />
