@@ -1,8 +1,8 @@
 #사용할 FireBase 기능
-<h3>Cloud Firestore</h3>
-<h3>Hosting</h3>
-<h3>Authentication</h3>
-<h3>Cloud Storage</h3>
+<h4>Cloud Firestore</h4>
+<h4>Hosting</h4>
+<h4>Authentication</h4>
+<h4>Cloud Storage</h4>
 
-<h3>FireBase 는 진지한 프로젝트에선 사용하지 않음 데이터베이스 의 정보를 가지고 올 수 없음
-프로젝트 테스트 또는 학습용으로 선정</h3>
+<h4>FireBase 는 진지한 프로젝트에선 사용하지 않음 데이터베이스 의 정보를 가지고 올 수 없음
+프로젝트 테스트 또는 학습용으로 선정</h4>
