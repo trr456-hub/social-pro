@@ -2,7 +2,6 @@ import Nweet from "components/Nweet";
 import { dbService } from "fbase";
 import {
   collection,
-  getDocs,
   addDoc,
   onSnapshot,
   query,
@@ -14,20 +13,20 @@ const Home = ({ userObj }) => {
   //console.log(userObj); //ID값 조회
   const [nweet, setNweet] = useState(""); // 글작성 tweet을 가지는 useState 작성
   const [nweets, setNweets] = useState([]);
-  const getNweets = async () => {
-    const dbNweets = await getDocs(collection(dbService, "nweets"));
-    dbNweets.forEach((document) => {
-      const nweetObject = {
-        ...document.data(),
-        id: document.id, //id값을 할당해주고 그걸 함수에 담아준다.
-      };
-      //console.log(nweetObject);
-      setNweets((prev) => [nweetObject, ...prev]);
-    });
-  };
+  // const getNweets = async () => {
+  //   const dbNweets = await getDocs(collection(dbService, "nweets"));
+  //   dbNweets.forEach((document) => {
+  //     const nweetObject = {
+  //       ...document.data(),
+  //       id: document.id, //id값을 할당해주고 그걸 함수에 담아준다.
+  //     };
+  //     //console.log(nweetObject);
+  //     setNweets((prev) => [nweetObject, ...prev]);
+  //   });
+  // };
   useEffect(() => {
     // firebase v9로 작성 v8로 작성하면 typeerror
-    getNweets();
+    //getNweets();
     const q = query(
       collection(dbService, "nweets"),
       orderBy("createdAt", "desc")
