@@ -33,6 +33,7 @@ const Home = ({ userObj }) => {
     );
     onSnapshot(q, (snapshot) => {
       const nweetArr = snapshot.docs.map((doc) => ({
+                      // snapshot 데이터베이스에서 알림을 받는것
         id: doc.id,
         ...doc.data(),
       }));
