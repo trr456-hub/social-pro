@@ -15,7 +15,7 @@ const Home = ({ userObj }) => {
   const [nweets, setNweets] = useState([]);
   // const getNweets = async () => {
   //   const dbNweets = await getDocs(collection(dbService, "nweets"));
-  //   dbNweets.forEach((document) => {
+  //   dbNweets.forEach((document) => { // forEach 로 작성 하면 rerender 해줘야함(새로고침)
   //     const nweetObject = {
   //       ...document.data(),
   //       id: document.id, //id값을 할당해주고 그걸 함수에 담아준다.
