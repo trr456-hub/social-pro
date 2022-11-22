@@ -78,7 +78,7 @@ const Home = ({ userObj }) => {
   // console.log(nweets);
   const onClearPhoto = () => {
     setAttachment(null);
-  }
+  };
   return (
     <div>
       <form onSubmit={onSubmit}>
