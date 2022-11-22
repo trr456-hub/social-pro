@@ -1,8 +1,9 @@
 import Nweet from "components/Nweet";
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
+import { v4 as uuidv4 } from "uuid";
+import { ref, uploadString } from "firebase/storage";
 import {
   collection,
-  addDoc,
   onSnapshot,
   query,
   orderBy,
@@ -44,12 +45,16 @@ const Home = ({ userObj }) => {
   }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
-    await addDoc(collection(dbService, "nweets"), {
-      text: nweet,
-      createdAt: Date.now(),
-      creatorId: userObj.uid,
-    });
-    setNweet("");
+    // const fileRef = ref(storageService, `${userObj}/${v4()}`); // npm install uuid 설치 : 식별자 랜덤생성
+    const fileRef = ref(storageService, `${userObj}/${uuidv4()}`); // db 업로드
+    const response = await uploadString(fileRef, attachment, "data_url");
+    console.log(response);
+    // await addDoc(collection(dbService, "nweets"), {
+    //   text: nweet,
+    //   createdAt: Date.now(),
+    //   creatorId: userObj.uid,
+    // });
+    // setNweet("");
   };
   const onChange = (event) => {
     const {
