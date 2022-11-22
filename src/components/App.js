@@ -25,7 +25,7 @@ function App() {
       ) : (
         "Initializiong..."
       )}
-      <footer>&copy;social-pro {new Date().getFullYear()}</footer>
+      
     </>
   );
 }
