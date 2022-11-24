@@ -8,7 +8,7 @@ import Navigation from "components/Navigation";
 const AppRouter = ({ isLoggedIn, userObj }) => {
   return (
     <Router>
-      {isLoggedIn && <Navigation />}
+      {isLoggedIn && <Navigation userObj={userObj} />}
       <Switch>
         {isLoggedIn ? (
           // Fragment <>부모요소 없이 render 하고싶을때</>
