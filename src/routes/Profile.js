@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { authService } from "fbase";
 import { useHistory } from "react-router-dom";
+import { updateProfile } from "firebase/auth";
 
- export default ({ userObj }) => {
+const Profile = ({ refreshUser, userObj }) => {
   const history = useHistory();
-  const [newDisplayName, setNewDisplayName] = useState("");
+  const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const onLogOutClick = () => {
     authService.signOut();
     history.push("/"); // 로그아웃 된 후 다시 홈으로 돌아갈수있게
@@ -37,9 +38,10 @@ import { useHistory } from "react-router-dom";
   const onSubmit = async (event) => {
     event.preventDefault();
     if (userObj.displayName !== newDisplayName) {
-      await userObj.updateProfile({
+      await updateProfile(authService.currentUser, {
         displayName: newDisplayName,
       });
+      refreshUser();
     }
   };
   return (
@@ -57,3 +59,5 @@ import { useHistory } from "react-router-dom";
     </>
   );
 };
+
+export default Profile;
