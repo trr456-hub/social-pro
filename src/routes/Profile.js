@@ -9,6 +9,7 @@ const Profile = ({ refreshUser, userObj }) => {
   const onLogOutClick = () => {
     authService.signOut();
     history.push("/"); // 로그아웃 된 후 다시 홈으로 돌아갈수있게
+    refreshUser();
   };
   // nweets 얻는 function 생성
   // const getMyNweets = async () => {
