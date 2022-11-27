@@ -3,12 +3,17 @@ import { v4 as uuidv4 } from "uuid";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const NweetFectory = ({ userObj }) => {
   //console.log(userObj); //ID값 조회
   const [nweet, setNweet] = useState(""); // 글작성 tweet을 가지는 useState 작성
   const [attachment, setAttachment] = useState("");
   const onSubmit = async (event) => {
+    if (nweet === "") {
+      return;
+    }
     event.preventDefault();
     let attachmentUrl = "";
     // const attachmentRef = ref(storageService, `${userObj}/${v4()}`); // npm install uuid 설치 : 식별자 랜덤생성
@@ -62,29 +67,48 @@ const NweetFectory = ({ userObj }) => {
     };
     reader.readAsDataURL(theFile); // theFile의 URL읽어오기
   };
-  const onClearPhoto = () => {
-    setAttachment("");
-  };
+  const onClearPhoto = () => setAttachment("");
   return (
-    <div>
-      <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="factoryForm">
+      <div className="factoryInput__container">
         <input
+          className="factoryInput__input"
           value={nweet}
           onChange={onChange}
           type="text"
-          placeholder="코멘트 작성"
+          placeholder="코멘트를 입력하세요."
           maxLength={120}
         />
-        <input type="file" accept="image/*" onChange={onFileChange} />
-        <input type="submit" value="글작성" />
-        {attachment && (
-          <div>
-            <img src={attachment} width="50px" height="50px" />
-            <button onClick={onClearPhoto}>업로드취소</button>
+        <input type="submit" value="&rarr;" className="factoryInput__arrow" />
+      </div>
+      <label htmlFor="attach-file" className="factoryInput__label">
+        <span>사진추가</span>
+        <FontAwesomeIcon icon={faPlus} />
+      </label>
+      <input
+        id="attach-file"
+        type="file"
+        accept="image/*"
+        onChange={onFileChange}
+        style={{
+          opacity: 0,
+        }}
+      />
+      {attachment && (
+        <div className="factoryForm__attachment">
+          <img
+            src={attachment}
+            style={{
+              backgroundImage: attachment,
+            }}
+          />
+          <div className="factoryForm__clear" onClick={onClearPhoto}>
+            <span>삭제</span>
+            <FontAwesomeIcon icon={faTimes} />
           </div>
-        )}
-      </form>
-    </div>
+        </div>
+      )}
+    </form>
   );
 };
 

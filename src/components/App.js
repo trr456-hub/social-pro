@@ -39,7 +39,7 @@ function App() {
           userObj={userObj}
         />
       ) : (
-        "Initializing..."
+        "불러오는중.."
       )}
     </>
   );
