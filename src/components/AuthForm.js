@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { authService } from "fbase";
 
-const inputStyle = {};
-
 const AuthForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,16 +20,12 @@ const AuthForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      let data;
       if (newAccount) {
         //계정생성
-        data = await authService.createUserWithEmailAndPassword(
-          email,
-          password
-        );
+        await authService.createUserWithEmailAndPassword(email, password);
       } else {
         //로그인
-        data = await authService.signInWithEmailAndPassword(email, password);
+        await authService.signInWithEmailAndPassword(email, password);
       }
       //console.log(data);
     } catch (error) {

@@ -1,10 +1,10 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faTwitter,
   faGoogle,
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
+import { faHandshake } from "@fortawesome/free-regular-svg-icons";
 import { authService } from "fbase";
 import { firebaseInstance } from "../fbase";
 import AuthForm from "components/AuthForm";
@@ -21,13 +21,13 @@ const Auth = () => {
     } else if (name === "github") {
       provider = new firebaseInstance.auth.GithubAuthProvider();
     }
-    const data = await authService.signInWithPopup(provider);
+    await authService.signInWithPopup(provider);
     //console.log(data);
   };
   return (
     <div className="authContainer">
       <FontAwesomeIcon
-        icon={faTwitter}
+        icon={faHandshake}
         color={"#04AAFF"}
         size="3x"
         style={{ marginBottom: 30 }}
