@@ -1,6 +1,7 @@
 import Nweet from "components/Nweet";
 import NweetFectory from "components/NweetFectory";
-import { dbService } from "fbase";
+import { authService, dbService } from "fbase";
+import { onAuthStateChanged } from "firebase/auth";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 
@@ -24,7 +25,7 @@ const Home = ({ userObj }) => {
       collection(dbService, "nweets"),
       orderBy("createdAt", "desc")
     );
-    onSnapshot(q, (snapshot) => {
+    const unsubscribe = onSnapshot(q, (snapshot) => {
       const nweetArr = snapshot.docs.map((doc) => ({
         // snapshot 데이터베이스에서 알림을 받는것
         id: doc.id,
@@ -32,6 +33,11 @@ const Home = ({ userObj }) => {
       }));
       setNweets(nweetArr);
       //console.log(nweetArr);
+    });
+    onAuthStateChanged(authService, (user) => {
+      if (user === null) {
+        unsubscribe();
+      }
     });
   }, []);
   return (
