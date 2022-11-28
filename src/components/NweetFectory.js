@@ -97,6 +97,7 @@ const NweetFectory = ({ userObj }) => {
       {attachment && (
         <div className="factoryForm__attachment">
           <img
+            alt="Profileimage"
             src={attachment}
             style={{
               backgroundImage: attachment,
