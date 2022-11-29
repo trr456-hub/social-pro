@@ -22,3 +22,7 @@ npm i @fortawesome/react-fontawesome
 
 https://www.daleseo.com/react-font-awesome/
 여기서 발췌
+
+# 보안 강화 
+https://console.developers.google.com/apis/credentials<p>
+를 통해 도메인을 추가하여 내 key를가지고 접근하는 것을 막을수있음
