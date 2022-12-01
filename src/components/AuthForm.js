@@ -15,7 +15,7 @@ const AuthForm = () => {
     } else if (name === "password") {
       setPassword(value);
     }
-    //console.log(value);
+    console.log(value);
   };
   const onSubmit = async (e) => {
     e.preventDefault();
