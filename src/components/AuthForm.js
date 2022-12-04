@@ -6,6 +6,7 @@ const AuthForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [modal, setModal] = useState(false);
 
   const onChange = (e) => {
     const {
@@ -31,7 +32,7 @@ const AuthForm = () => {
     }
   };
   const setWindow = () => {
-    window.open(`${AuthWindow}`);
+    setModal(true);
   };
   return (
     <>
@@ -57,9 +58,12 @@ const AuthForm = () => {
         <input type="submit" className="authInput authSubmit" value="로그인" />
         {error && <span className="authError">{error}</span>}
       </form>
-      <span onClick={setWindow} className="authSwitch">
-        회원가입
-      </span>
+      <div>
+        <span onClick={setWindow} className="authSwitch">
+          회원가입
+        </span>
+        {modal && <AuthWindow setModal={setModal} />}
+      </div>
     </>
   );
 };
