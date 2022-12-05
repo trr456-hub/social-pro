@@ -6,7 +6,20 @@ const AuthWindow = ({ setModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const onChange = (e) => {
+    // console.log(e.target.value);
+    const {
+      target: { name, value },
+    } = e;
+    if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    }
+    //console.log(value);
+  };
   const onSubmit = async (e) => {
+    e.preventDefault();
     try {
       await authService.createUserWithEmailAndPassword(email, password);
       //회원가입
@@ -20,7 +33,7 @@ const AuthWindow = ({ setModal }) => {
   };
   return (
     <>
-      <div className="modalContainer">
+      <div onSubmit={onSubmit} className="modalContainer">
         <button className="close" onClick={closeModal}>
           X
         </button>
@@ -32,6 +45,7 @@ const AuthWindow = ({ setModal }) => {
             required
             value={email}
             className="authInput"
+            onChange={onChange}
           />
           <input
             name="password"
@@ -40,6 +54,7 @@ const AuthWindow = ({ setModal }) => {
             required
             value={password}
             className="authInput"
+            onChange={onChange}
           />
           <input
             type="submit"
