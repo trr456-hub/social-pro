@@ -33,11 +33,11 @@ const AuthWindow = ({ setModal }) => {
   };
   return (
     <>
-      <div onSubmit={onSubmit} className="modalContainer">
+      <div className="modalContainer">
         <button className="close" onClick={closeModal}>
           X
         </button>
-        <form>
+        <form onSubmit={onSubmit} className="loginForm">
           <input
             name="email"
             type="email"

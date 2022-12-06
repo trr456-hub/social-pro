@@ -304,3 +304,12 @@ form {
   right: 10px;
   top: 10px;
 }
+
+/* 모달창 로그인 폼 */
+.loginForm {
+  width: 321px;
+  position: absolute;
+  margin: auto;
+  top: 80px;
+  left: 40px;
+}
