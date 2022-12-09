@@ -34,12 +34,15 @@ const AuthWindow = ({ setModal }) => {
   const closeModal = () => {
     setModal(false);
   };
-  const modalRef = useRef < HTMLDivElement > null;
+  const modalRef = useRef();
+
   useEffect(() => {
     const handler = (e) => {
       // mousedown 이 발생된 영역이 modal창 밖이면 모달창 제거 처리
-      if (modalRef.current || !modalRef.current.contains(e.target)) {
+      if (modalRef && !modalRef.current.contains(e.target)) {
         setModal(false);
+      } else {
+        setModal(true);
       }
     };
     // eventhandler 등록
@@ -48,11 +51,11 @@ const AuthWindow = ({ setModal }) => {
       // eventhandler 해제
       document.removeEventListener("mousedown", handler);
     };
-  }, [modalRef, setModal]);
+  }, [setModal]);
 
   return (
     <>
-      <div className="modalContainer">
+      <div ref={modalRef} className="modalContainer">
         <button className="close" onClick={closeModal}>
           X
         </button>
