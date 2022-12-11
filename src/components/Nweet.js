@@ -8,6 +8,7 @@ import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newNweet, setNewNweet] = useState(nweetObj.text);
+  const [imgModal, setImgModal] = useState(false);
   const NweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`);
   const photoDel = ref(storageService, nweetObj.attachmentUrl);
   // 사진의 url경로를 변수에 담음
