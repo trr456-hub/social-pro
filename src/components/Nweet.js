@@ -40,6 +40,10 @@ const Nweet = ({ nweetObj, isOwner }) => {
     } = e;
     setNewNweet(value);
   };
+  const setWindow = (e) => {
+    setImgModal(true);
+    console.log(e.target);
+  };
   return (
     <div className="nweet">
       {editing ? (
@@ -63,7 +67,9 @@ const Nweet = ({ nweetObj, isOwner }) => {
       ) : (
         <>
           <h4>{nweetObj.text}</h4>
-          {nweetObj.attachmentUrl && <img alt="imges" src={nweetObj.attachmentUrl} />}
+          {nweetObj.attachmentUrl && (
+            <img onClick={setWindow} alt="imges" src={nweetObj.attachmentUrl} />
+          )}
           {isOwner && (
             <div className="nweet__actions">
               <span onClick={onDeleteClick}>
