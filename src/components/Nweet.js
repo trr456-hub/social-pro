@@ -8,7 +8,6 @@ import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newNweet, setNewNweet] = useState(nweetObj.text);
-  const [imgModal, setImgModal] = useState(false);
   const NweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`);
   const photoDel = ref(storageService, nweetObj.attachmentUrl);
   // 사진의 url경로를 변수에 담음
@@ -40,9 +39,14 @@ const Nweet = ({ nweetObj, isOwner }) => {
     } = e;
     setNewNweet(value);
   };
-  const setWindow = (e) => {
-    setImgModal(true);
-    console.log(e.target);
+  const setImgWindow = (e) => {
+    // setImgModal(true);
+    // console.log(e.target.src);
+    window.open(
+      e.target.src,
+      "_blank",
+      "toolbar=yes,scrollbars=yes,resizable=yes,top=180,left=410,width=600,height=600"
+    );
   };
   return (
     <div className="nweet">
@@ -68,7 +72,11 @@ const Nweet = ({ nweetObj, isOwner }) => {
         <>
           <h4>{nweetObj.text}</h4>
           {nweetObj.attachmentUrl && (
-            <img onClick={setWindow} alt="imges" src={nweetObj.attachmentUrl} />
+            <img
+              onClick={setImgWindow}
+              alt="imges"
+              src={nweetObj.attachmentUrl}
+            />
           )}
           {isOwner && (
             <div className="nweet__actions">
