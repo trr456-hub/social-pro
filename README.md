@@ -1,3 +1,6 @@
+# 배포URL
+https://gorhf9397.github.io/social-pro
+
 #사용할 FireBase 기능
 <h4>Cloud Firestore</h4>
 <h4>Hosting</h4>
